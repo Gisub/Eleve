@@ -1,0 +1,274 @@
+set cut_paste_input [stack 0]
+version 11.1 v1
+Root {
+ inputs 0
+ colorManagement OCIO
+ first_frame {info_startframe}
+ last_frame {info_endframe}
+ fps 24
+ #onScriptLoad "nuke.execute(nuke.toNode('CurveTool1'), info_startframe, info_startframe)"
+ info_ocio
+}
+Read {
+ inputs 0
+ file info_orgSeq
+ first {info_startframe}
+ last {info_endframe}
+ origset true
+ colorspace "info_colorspace"
+ r3d_sdk 11
+ r3d_init 2
+ r3d_rockect_custom_scale {4096 2304}
+ r3d_colorspace Rec2020
+ r3d_gamma_curve "Half Float Linear"
+ color_version v2
+ r3d_iso 800
+ r3d_gain {1 1 1}
+ r3d_lggLift {0 0 0}
+ r3d_lggGamma {1 1 1}
+ r3d_lggGain {1 1 1}
+ r3d_pdlog_gamma 0.6000000238
+ #raw true
+ name Read1
+ note_font "bold"
+ selected true
+ xpos 584
+ ypos -688
+}
+Group {
+ name Eleve_slate
+ tile_color 0x55bfffff
+ note_font "DejaVu Sans Bold"
+ note_font_size 20
+ selected true
+ disable disable_slate
+ xpos 584
+ ypos -556
+ addUserKnob {20 User}
+}
+ Read {
+  inputs 0
+  file /core/Linux/APPZ/packages/nuke_inhouse/1.0.0/nuke/gizmos/slate/custom/M83_LOGO.png
+  format "4783 771 0 0 4783 771 1 "
+  origset true
+  name Read10
+  xpos -284
+  ypos -479
+  postage_stamp false
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color 1
+  format "4783 771 0 0 4783 771 1 "
+  name Constant3
+  xpos -164
+  ypos -568
+ }
+ ShuffleCopy {
+  inputs 2
+  name ShuffleCopy1
+  xpos -164
+  ypos -473
+ }
+ Premult {
+  name Premult1
+  xpos -164
+  ypos -409
+ }
+ Reformat {
+  type "to box"
+  box_width 1024
+  name Reformat2
+  xpos -164
+  ypos -353
+ }
+ Transform {
+  translate {450 -15}
+  scale 0.1
+  center {512 82.5}
+  name Transform1
+  xpos -164
+  ypos -289
+ }
+ Multiply {
+  value 0.25
+  name Multiply2
+  xpos -164
+  ypos -210
+ }
+ Input {
+  inputs 0
+  name Input1
+  xpos -28
+  ypos -1236
+ }
+ Dot {
+  name Dot1
+  xpos 6
+  ypos -1136
+ }
+set N5f8ab7a0 [stack 0]
+ Dot {
+  name Dot2
+  xpos -324
+  ypos -1136
+ }
+ Dot {
+  name Dot3
+  xpos -324
+  ypos -608
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color 0.55
+  format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+  name Constant2
+  xpos -248
+  ypos -827
+ }
+ Crop {
+  box {0 51 1024 52}
+  name Crop2
+  xpos -248
+  ypos -732
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+  name Constant1
+  xpos -138
+  ypos -971
+ }
+ Crop {
+  box {0 0 1024 52}
+  name Crop1
+  xpos -138
+  ypos -873
+ }
+ Multiply {
+  value 0.35
+  name Multiply1
+  xpos -138
+  ypos -810
+ }
+push $N5f8ab7a0
+ Reformat {
+  type "to box"
+  box_width 1024
+  name Reformat1
+  xpos -28
+  ypos -1014
+ }
+ Merge2 {
+  inputs 2
+  name Merge1
+  xpos -28
+  ypos -804
+ }
+ Merge2 {
+  inputs 2
+  bbox B
+  name Merge2
+  xpos -28
+  ypos -732
+ }
+ CopyMetaData {
+  inputs 2
+  name CopyMetaData1
+  xpos -28
+  ypos -612
+ }
+set Nb24db740 [stack 0]
+ Text {
+  message "\[metadata input/timecode] | \[value frame] (\[value last_frame])"
+  font /core/Linux/APPZ/font/YuGothM.ttc
+  size 18
+  xjustify right
+  yjustify center
+  Transform 1
+  box {655 10 1000 40}
+  center {1024 0}
+  name Text1
+  xpos -28
+  ypos -437
+ }
+ Text {
+  message "\[metadata input/width]x\[metadata input/height] "
+  font /core/Linux/APPZ/font/YuGothM.ttc
+  size 18
+  yjustify center
+  Transform 1
+  box {25 10 210 40}
+  center {1024 0}
+  name Text2
+  xpos -28
+  ypos -375
+ }
+ Text {
+  message "\[lrange \[split \[file tail \[metadata input/filename]] . ] 0 0 ] (\[file extension \[metadata input/filename]])"
+  font /core/Linux/APPZ/font/YuGothM.ttc
+  size 22
+  xjustify center
+  yjustify center
+  Transform 1
+  box {280 10 744 40}
+  center {1024 0}
+  name Text3
+  xpos -28
+  ypos -315
+ }
+ Merge2 {
+  inputs 2
+  bbox B
+  name Merge3
+  xpos -28
+  ypos -204
+ }
+ Output {
+  name Output1
+  xpos -28
+  ypos -13
+ }
+push $Nb24db740
+ ViewMetaData {
+  name ViewMetaData1
+  xpos 183
+  ypos -612
+ }
+end_group
+OCIODisplay {
+ colorspace "ACES - ACEScg"
+ display ACES
+ view Rec.709
+ name OCIODisplay1
+ selected true
+ xpos 584
+ ypos -500
+}
+Write {
+ file info_movfile
+ #colorspace "Output - sRGB"
+ raw true
+ file_type mov
+ mov64_fps info_fps
+ mov64_codec mp4v
+ mov64_advanced 1
+ mov64_bitrate 2000000
+ mov64_bitrate_tolerance 40000000
+ mov64_quality_min 2
+ mov64_quality_max 31
+ mov64_gop_size 12
+ mov64_b_frames 0
+ first {info_startframe}
+ last {info_endframe}
+ use_limit true
+ checkHashOnRead false
+ version 156
+ name write_mov
+ selected true
+ xpos 584
+ ypos -427
+}

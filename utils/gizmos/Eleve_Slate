@@ -1,0 +1,6 @@
+#!/bin/bash
+
+SCRIPT_DIR="$( cd "$( dirname "$0" )" && pwd )"
+path_dir=$(python ${SCRIPT_DIR}/Eleve_slate.py "$@" 2>&1)
+echo ">>> $path_dir"
+/opt/Nuke11.1v1/Nuke11.1 --nukex -i -x ${path_dir}
