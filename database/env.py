@@ -2,12 +2,11 @@ import os
 
 config = {}
 
-config['ADMIN'] = ['gisub', 'jaeeun', 'chulho']
-# config['ADMIN'] = []
-config['LEADER'] = ['sungku', 'yanghae', 'youjin']
+config['ADMIN'] = ['gisub']
+config['LEADER'] = []
 for a in config['ADMIN']:
     config['LEADER'].append(a)
-config['SEMI_LEADER'] = ['gyoungwon']
+config['SEMI_LEADER'] = []
 for a in config['LEADER']:
     config['SEMI_LEADER'].append(a)
 
