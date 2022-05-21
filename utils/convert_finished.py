@@ -2,7 +2,6 @@ import sys
 import json
 import os
 import time
-sys.path.append("/core/Linux/APPZ/packages/nuke_inhouse/1.0.0/python/Eleve/database")
 from env import *
 
 class Convert_finished:
