@@ -7,7 +7,7 @@ class Jobscript(object):
         self.job_env = {}
 
     def submit_to_farm(self):
-        self.job_env = {'engine': '192.168.10.11',
+        self.job_env = {'engine': '123.456.789.10',
                         'service': 'nukeuser',
                         'priority': 95,
                         'name': os.environ.get('HOSTNAME'),
