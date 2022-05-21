@@ -3,9 +3,7 @@ import re
 import sys
 import subprocess
 import json
-sys.path.append("/core/Linux/APPZ/packages/nuke_inhouse/1.0.0/python/Eleve/database")
 from env import *
-from fthcore import baker, fth_seq
 
 
 def query_metadata(src_file):
