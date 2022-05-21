@@ -3,7 +3,7 @@ from main import *
 from nukescripts import panels
 
 
-nuke.menu('Nuke').addCommand('M83/Eleve', 'main()', 'F9')
+nuke.menu('Nuke').addCommand('Eleve', 'main()', 'F9')
 
 
 class ElevePanel(nukescripts.PythonPanel):
